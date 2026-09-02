@@ -1,0 +1,33 @@
+# ===============================
+# 1. Temporários e backups do Power BI
+# ===============================
+*.pbix.tmp
+~$*.pbix
+AutoRecovery*
+
+# ===============================
+# 2. Python, Jupyter & Ambientes
+# ===============================
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+env.bak/
+ENV/
+venv.bak/ 
+
+# Segredos, chaves e variáveis de ambiente
+.env
+*.pem
+
+# ===============================
+# 3. Sistema Operacional & IDEs
+# ===============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
