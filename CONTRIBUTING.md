@@ -4,6 +4,14 @@ Este documento orienta o fluxo de trabalho da equipe no repositório do projeto.
 
 ---
 
+## Sumário
+
+- [1. Configuração Inicial do Ambiente](#1-configuração-inicial-do-ambiente)
+- [2. Fluxo de Trabalho com Git](#2-fluxo-de-trabalho-com-git)
+- [3. Gestão de Tarefas com GitHub Projects](#3-gestão-de-tarefas-com-github-projects)
+
+---
+
 ## 1. Configuração Inicial do Ambiente
 
 Escolha uma das abordagens abaixo de acordo com a sua preferência (Google Colab ou máquina local):
@@ -21,8 +29,8 @@ Escolha uma das abordagens abaixo de acordo com a sua preferência (Google Colab
 - Se precisar importar módulos de `src/` ou rodar scripts completos, execute na primeira célula:
 
 ```bash
-!git clone https://github.com/vikpires/ai_academy_final_challenge.git
-%cd /content/ai_academy_final_challenge
+!git clone https://github.com/vikpires/DS_projeto_aneel_equipe14.git
+%cd /content/DS_projeto_aneel_equipe14
 !pip install -r requirements.txt
 ```
 
@@ -36,8 +44,8 @@ Escolha uma das abordagens abaixo de acordo com a sua preferência (Google Colab
 #### **1. Clonar o Repositório:**
 
 ```bash
-git clone git@github.com:vikpires/ai_academy_final_challenge.git
-cd ai_academy_final_challenge
+git clone git@github.com:vikpires/DS_projeto_aneel_equipe14.git
+cd DS_projeto_aneel_equipe14
 
 ```
 
@@ -53,7 +61,7 @@ python -m venv .venv
 - Linux / macOS::
 
 ```bash
-cd ai_academy_final_challenge
+cd DS_projeto_aneel_equipe14
 python3 -m venv .venv
 source .venv/bin/activate
 ```
@@ -120,4 +128,34 @@ git push origin develop
 
 ---
 
-Essas são apenas algumas orientações gerais ao trabalhar com Git e GitHub. Demais dúvidas ou esclarecimentos, fiquem à vontade para perguntar.
+## 3. Gestão de Tarefas com GitHub Projects
+
+Para a organização e o acompanhamento das atividades da equipe, utilizamos o **GitHub Projects** integrado ao repositório. O painel adota o fluxo Kanban, acessível pela aba superior **Projects** no GitHub, estruturado nas seguintes colunas:
+
+* **Backlog:** Repositório com todas as tarefas (tasks) adicionadas aguardando escolha por um ou mais membros da equipe.
+
+* **To Do:** Tarefas priorizadas para desenvolvimento. Cada membro deve selecionar **no máximo 2 tarefas** simultâneas para iniciar.
+
+* **In Progress:** Tarefa em desenvolvimento ativo no momento. Mantenha apenas uma atividade aqui para manter o foco.
+
+* **In Review:** Tarefa concluída aguardando validação de código, regras de negócio ou revisão de documentação por outro integrante do time.
+
+* **Done:** Tarefa aprovada, validada e devidamente mesclada na branch `develop`.
+
+### Como assumir e gerenciar uma tarefa:
+1. **Escolha da tarefa:** Acesse a coluna **Backlog**, abra o card que deseja assumir e, no menu lateral direito em **Assignees**, selecione o seu usuário do GitHub.
+
+2. **Priorização:** Mova o card para a coluna **To Do** (limite de no máximo 2 tarefas simultâneas por membro).
+
+3. **Início do trabalho:** Ao começar o desenvolvimento técnico, arraste o card para **In Progress**.
+
+4. **Vínculo de commits:** Sempre que realizar um commit referente à atividade, referencie o número da issue na mensagem (ex.: `:sparkles: feat: script de limpeza dec fec (#2)`) para atualizar o histórico automaticamente no Projects.
+
+5. **Revisão entre pares:** Ao concluir a tarefa e subir os arquivos para a branch `develop`, mova o card para **In Review** e avise no grupo da equipe para que um colega confira o código/notebook.
+
+6. **Finalização:** Após a validação do colega (e sem pendências de correção), o card é movido para **Done**, encerrando a entrega.
+
+---
+> [!NOTE]
+> Estas são diretrizes gerais para padronizar o trabalho colaborativo. Qualquer dúvida técnica ou conflitos de código, informe ao grupo da equipe ou aproveite as reuniões de alinhamento.
+

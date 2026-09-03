@@ -17,33 +17,37 @@
 ---
 
 ## Descrição
-Projeto de **Análise de Dados e Machine Learning** desenvolvido sobre dados públicos da Agência Nacional de Energia Elétrica (ANEEL), com foco no diagnóstico dos indicadores de continuidade do fornecimento elétrico (DEC e FEC) e na mitigação de riscos e compensações regulatórias no Brasil. Trabalho desenvolvido como projeto prático da formação **AI Talent Academy**, da *White Cube*.
+
+Projeto de **Análise de Dados e Machine Learning** desenvolvido sobre dados públicos da Agência Nacional de Energia Elétrica (ANEEL), com foco no diagnóstico dos indicadores de continuidade do fornecimento elétrico (DEC e FEC) e na mitigação de riscos e compensações regulatórias no Brasil. Trabalho desenvolvido como projeto prático da formação **AI Talent Academy**, da _White Cube_.
 
 ---
 
 ## Sumário
+
 - [1. Contexto](#1-contexto)
 - [2. Objetivo](#2-objetivo)
 - [3. Base de Dados](#3-base-de-dados)
 - [4. Metodologia](#4-metodologia)
 - [5. Cronograma e Fases](#5-cronograma-e-fases)
 - [6. Organização dos Diretorios](#6-organização-dos-diretórios)
-- [7. Desenvolvedores](#7-desenvolvedores)
+- [7. Equipe](#7-equipe)
 
 ---
 
 ## 1. Contexto
+
 No setor de distribuição de energia elétrica no Brasil, a **Agência Nacional de Energia Elétrica (ANEEL)** estabelece metas e padrões contratuais estritos de qualidade por meio de dois indicadores coletivos de continuidade:
 
-* **DEC (Duração Equivalente de Interrupção por Unidade Consumidora):** Mede o tempo médio (em horas) que os consumidores atendidos por determinado conjunto ficaram sem energia.
+- **DEC (Duração Equivalente de Interrupção por Unidade Consumidora):** Mede o tempo médio (em horas) que os consumidores atendidos por determinado conjunto ficaram sem energia.
 
-* **FEC (Frequência Equivalente de Interrupção por Unidade Consumidora):** Mede a quantidade média de vezes em que ocorreram interrupções no fornecimento.
+- **FEC (Frequência Equivalente de Interrupção por Unidade Consumidora):** Mede a quantidade média de vezes em que ocorreram interrupções no fornecimento.
 
 A transgressão desses limites regulatórios acarreta compensações financeiras obrigatórias repassadas diretamente na fatura dos consumidores afetados, impactando a receita operacional líquida das concessionárias e sua reputação institucional.
 
 ---
 
 ## 2. Objetivo
+
 Construir uma solução de análise de dados capaz de:
 
 - Analisar a evolução dos indicadores DEC e FEC;
@@ -57,10 +61,11 @@ Construir uma solução de análise de dados capaz de:
 ---
 
 ## 3. Base de Dados
+
 Os dados utilizados são públicos e extraídos do portal de dados abertos da ANEEL:
 
-* **Dataset:** [Indicadores Coletivos de Continuidade (DEC e FEC)](https://dadosabertos.aneel.gov.br/pt_BR/dataset/indicadores-coletivos-de-continuidade-dec-e-fec)
-* **Métricas Principais:** Valores apurados, limites regulatórios mensais e anuais contratados.
+- **Dataset:** [Indicadores Coletivos de Continuidade (DEC e FEC)](https://dadosabertos.aneel.gov.br/pt_BR/dataset/indicadores-coletivos-de-continuidade-dec-e-fec)
+- **Métricas Principais:** Valores apurados, limites regulatórios mensais e anuais contratados.
 
 ---
 
@@ -83,6 +88,7 @@ O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
 ---
 
 ## 5. Cronograma e Fases
+
 <p align="left">
   <a href="https://github.com/users/vikpires/projects/7/views/4?sliceBy[columnId]=Milestone">
     <img src="https://img.shields.io/badge/Backlog_&_Roadmap-1074e7?style=for-the-badge&logo=github&logoColor=white" alt="Backlog e Roadmap" />
@@ -91,12 +97,12 @@ O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
 
 | Fase / Marco | Status | Período | Tarefas |
 | :--- | :---: | :---: | :---: |
-| **01:  Compreensão do Negócio (Business Understanding)** | Em Progresso | Semana 4 | [Ver Tarefas](https://github.com/vikpires/ai_academy_final_challenge/milestone/1) |
-| **02: Compreensão dos Dados (Data Understanding)** | Em Progresso | Semana 5 | [Ver Tarefas](https://github.com/vikpires/ai_academy_final_challenge/milestone/6) |
-| **03: Preparação dos Dados (Data Preparation)** | A Iniciar | Semana 6 | [Ver Tarefas](https://github.com/vikpires/ai_academy_final_challenge/milestone/2) |
-| **04: Modelagem (Modeling)** | A Iniciar | Semana 7 | [Ver Tarefas](https://github.com/vikpires/ai_academy_final_challenge/milestone/3) |
-| **05: Avaliação (Evaluation)** | A Iniciar | Semana 8 | [Ver Tarefas](https://github.com/vikpires/ai_academy_final_challenge/milestone/4) |
-| **06: Implantação (Deployment) & Demo Day** | A Iniciar | Semana 8 | [Ver Tarefas](https://github.com/vikpires/ai_academy_final_challenge/milestone/5) |
+| **01:  Compreensão do Negócio (Business Understanding)** | Em Progresso | Semana 4 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/1) |
+| **02: Compreensão dos Dados (Data Understanding)** | Em Progresso | Semana 5 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/6) |
+| **03: Preparação dos Dados (Data Preparation)** | A Iniciar | Semana 6 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/2) |
+| **04: Modelagem (Modeling)** | A Iniciar | Semana 7 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/3) |
+| **05: Avaliação (Evaluation)** | A Iniciar | Semana 8 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/4) |
+| **06: Implantação (Deployment) & Demo Day** | A Iniciar | Semana 8 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/5) |
 
 ---
 
@@ -123,13 +129,14 @@ O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
 └── 📄 requirements.txt    # Lista de dependências e bibliotecas do projeto
 
 ```
+
 ---
 
-## 7. Desenvolvedores
+## 7. Equipe
 
- - [Antônio Marcel](https://github.com/MarcelProgram)
- - [Edivaldo Dias](https://github.com/Edy-Ap-Dias)
- - [Leonardo Gomes](https://github.com/LeonardoFGs)
- - [Leonardo Santos](https://github.com/leojosants)
- - [Vanessa Vilela](https://github.com/vsvilela39-oss)
- - [Vitor Pires](https://github.com/vikpires)
+- [Antônio Marcel](https://github.com/MarcelProgram)
+- [Edivaldo Dias](https://github.com/Edy-Ap-Dias)
+- [Leonardo Gomes](https://github.com/LeonardoFGs)
+- [Leonardo Santos](https://github.com/leojosants)
+- [Vanessa Vilela](https://github.com/vsvilela39-oss)
+- [Vitor Pires](https://github.com/vikpires)
