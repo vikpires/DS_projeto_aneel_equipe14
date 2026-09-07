@@ -31,3 +31,8 @@ venv.bak/
 Thumbs.db
 .vscode/
 .idea/
+
+# Dados Locais
+data/raw/*
+data/interim/*
+!data/raw/.gitkeep
