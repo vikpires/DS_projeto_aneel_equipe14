@@ -2,16 +2,20 @@
    <img src=".\docs\assets\energy_towers.jpg" width=100% alt="Imagem de torres de energia elétrica" /> 
  </div>
 
-# Análise de Dados de Continuidade Elétrica e Previsão de Risco Regulatório (ANEEL)
+# Projeto ANEEL - Energia em Risco
+### Análise de Dados de Continuidade Elétrica e Previsão de Risco Regulatório (ANEEL)
 
 <p align="left">
-  <!-- Linguagem & Ambientes -->
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
   <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" />
   <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" />
+  <img src="https://img.shields.io/badge/DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black" alt="DuckDB" />
   <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge" alt="Matplotlib" />
   <img src="https://img.shields.io/badge/Seaborn-4C72B0?style=for-the-badge" alt="Seaborn" />  
   <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI" />
+  <img src="https://img.shields.io/badge/scikit_learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="Scikit-Learn" />
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
+
 </p>
 
 ---
@@ -25,12 +29,13 @@ Projeto de **Análise de Dados e Machine Learning** desenvolvido sobre dados pú
 ## Sumário
 
 - [1. Contexto](#1-contexto)
-- [2. Objetivo](#2-objetivo)
-- [3. Base de Dados](#3-base-de-dados)
-- [4. Metodologia](#4-metodologia)
-- [5. Cronograma e Fases](#5-cronograma-e-fases)
-- [6. Organização dos Diretorios](#6-organização-dos-diretórios)
-- [7. Equipe](#7-equipe)
+- [2. Objetivo Geral](#2-objetivo-geral)
+- [3. Objetivos Específicos](#3-objetivos-específicos)
+- [4. Base de Dados](#4-base-de-dados)
+- [5. Metodologia](#5-metodologia)
+- [6. Cronograma e Fases](#6-cronograma-e-fases)
+- [7. Organização dos Diretorios](#7-organização-dos-diretórios)
+- [8. Equipe](#8-equipe)
 
 ---
 
@@ -46,30 +51,40 @@ A transgressão desses limites regulatórios acarreta compensações financeiras
 
 ---
 
-## 2. Objetivo
+## 2. Objetivo Geral
 
-Construir uma solução de análise de dados capaz de:
-
-- Analisar a evolução dos indicadores DEC e FEC;
-- Comparar os valores realizados com os limites regulatórios;
-- Identificar conjuntos consumidores com maior incidência de transgressões;
-- Analisar os principais grupos e causas das interrupções;
-- Identificar padrões temporais e operacionais;
-- Relacionar causas de interrupções ao comportamento dos indicadores de continuidade;
-- Desenvolver um modelo de Machine Learning para estimar o risco de transgressão futura.
+Construir uma solução integrada de Análise de Dados e Machine Learning que permita analisar o comportamento histórico dos indicadores DEC e FEC, diagnosticar reincidências de transgressões e estimar a probabilidade de descumprimento dos limites regulatórios futuros em nível de conjunto consumidor.
 
 ---
 
-## 3. Base de Dados
+## 3. Objetivos Específicos
 
-Os dados utilizados são públicos e extraídos do portal de dados abertos da ANEEL:
+* Consolidar a série histórica (2023–2025) dos dados de continuidade da ANEEL
 
-- **Dataset:** [Indicadores Coletivos de Continuidade (DEC e FEC)](https://dadosabertos.aneel.gov.br/pt_BR/dataset/indicadores-coletivos-de-continuidade-dec-e-fec)
-- **Métricas Principais:** Valores apurados, limites regulatórios mensais e anuais contratados.
+* Comparar os valores apurados com os limites regulatórios, mapeando taxas de transgressão e gerando ranking dos conjuntos elétricos mais críticos.
+
+* Identificar comportamentos cíclicos e disparidades regionais no desempenho operacional.
+
+* Treinar e avaliar um modelo de Machine Learning supervisionado para classificar o risco de violação (Apurado > Limite) de conjuntos elétricos no horizonte mensal subsequente.
+
+* Disponibilizar os diagnósticos, estimativas de passivo financeiro e scores de risco preditivo em dashboards interativos no Power BI sob modelagem *Star Schema*.
 
 ---
 
-## 4. Metodologia
+## 4. Base de Dados
+
+Os dados utilizados são públicos e extraídos do portal de dados abertos da ANEEL. Para fins de análise, o conjunto de dados será limitado a um período de 3 anos (2023-2026):
+
+**Datasets:** 
+- [Indicadores Coletivos de Continuidade (DEC e FEC)](https://dadosabertos.aneel.gov.br/pt_BR/dataset/indicadores-coletivos-de-continuidade-dec-e-fec)
+- [Interrupções de Energia Elétrica nas Redes de Distribuição)](https://dadosabertos.aneel.gov.br/pt_BR/dataset/indicadores-coletivos-de-continuidade-dec-e-fec)
+
+**Métricas Principais:** 
+- Valores apurados, limites regulatórios mensais e anuais contratados.
+
+---
+
+## 5. Metodologia
 
 O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
 
@@ -87,7 +102,7 @@ O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
 
 ---
 
-## 5. Cronograma e Fases
+## 6. Cronograma e Fases
 
 <p align="left">
   <a href="https://github.com/users/vikpires/projects/7/views/4?sliceBy[columnId]=Milestone">
@@ -97,7 +112,7 @@ O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
 
 | Fase / Marco | Status | Período | Tarefas |
 | :--- | :---: | :---: | :---: |
-| **01:  Compreensão do Negócio (Business Understanding)** | Em Progresso | Semana 4 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/1) |
+| **01:  Compreensão do Negócio (Business Understanding)** | Concluído | Semana 4 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/1) |
 | **02: Compreensão dos Dados (Data Understanding)** | Em Progresso | Semana 5 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/6) |
 | **03: Preparação dos Dados (Data Preparation)** | A Iniciar | Semana 6 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/2) |
 | **04: Modelagem (Modeling)** | A Iniciar | Semana 7 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/3) |
@@ -106,13 +121,14 @@ O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
 
 ---
 
-## 6. Organização dos Diretórios
+## 7. Organização dos Diretórios
 
 ```markdown
 ├── 📁 data/
-│   ├── 📁 raw/            # Dados brutos originais
+│   ├── 📁 raw/            # Dados brutos originais (Camada Bronze)
+│   ├── 📁 interim/        # Dados intermediários (Camada Silver)
 │   ├── 📁 external/       # Dados externos e bases de apoio
-│   └── 📁 processed/      # Dados finais tratados para análise e modelagem
+│   └── 📁 processed/      # Dados finais tratados para análise e modelagem (Camada Gold)
 │
 ├── 📁 docs/               # Documentação do projeto, escopo e dicionário de dados
 │    ├── 📁 assets/        # Imagens e diagramas para documentação
@@ -132,7 +148,7 @@ O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
 
 ---
 
-## 7. Equipe
+## 8. Equipe
 
 - [Antônio Marcel](https://github.com/MarcelProgram)
 - [Edivaldo Dias](https://github.com/Edy-Ap-Dias)
