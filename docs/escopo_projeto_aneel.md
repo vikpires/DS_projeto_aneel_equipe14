@@ -6,7 +6,7 @@
 
 * **Data de Elaboração:** 09/2026
 
-* **Versão:** 1.0
+* **Versão:** 1.1
 
 ---
 
@@ -19,17 +19,18 @@
     - [3.2. Problema](#32-problema)
     - [3.3. Objetivo Geral](#33-objetivo-geral)
     - [3.4. Objetivos Específicos](#34-objetivos-específicos)
-- [4. Usuários e Matriz de Stakeholders](#4-usuários-e-matriz-de-stakeholders)
-- [5. Dados Necessários e Fontes](#5-dados-necessários-e-fontes)
-- [6. Hipóteses do Projeto](#6-hipóteses-do-projeto)
-- [7. Riscos](#7-riscos)
-- [8. Fora de Escopo](#8-fora-de-escopo)
-- [9. Estrutura de Custos](#9-estrutura-de-custos)
-- [10. Solução](#10-solução)
-- [11. Métricas de Avaliação e Benchmarks de Sucesso](#11-métricas-de-avaliação-e-benchmarks-de-sucesso)
-- [12. Requisitos e Restrições ](#12-requisitos-e-restrições)
-- [13. Entregáveis](#13-entregáveis)
-- [14. Síntese Executiva](#14-síntese-executiva)
+- [4. Metodologia](#4-metodologia)
+- [5. Usuários e Matriz de Stakeholders](#5-usuários-e-matriz-de-stakeholders)
+- [6. Dados Necessários e Fontes](#6-dados-necessários-e-fontes)
+- [7. Hipóteses do Projeto](#7-hipóteses-do-projeto)
+- [8. Riscos](#8-riscos)
+- [9. Fora de Escopo](#9-fora-de-escopo)
+- [10. Estrutura de Custos](#10-estrutura-de-custos)
+- [11. Solução](#11-solução)
+- [12. Métricas de Avaliação e Benchmarks de Sucesso](#12-métricas-de-avaliação-e-benchmarks-de-sucesso)
+- [13. Requisitos e Restrições ](#13-requisitos-e-restrições)
+- [14. Entregáveis](#14-entregáveis)
+- [15. Síntese Executiva](#15-síntese-executiva)
 
 ---
 
@@ -41,7 +42,7 @@
 
 * **Metodologia de Gestão:** CRISP-DM e a metodologia ágil Kanban
 
-* **Repositório Oficial:** [Repositório do Projeto](https://github.com/vikpires/DS_projeto_aneel_equipe14) | (Branch padrão: `develop`)
+* **Repositório Oficial:** [Repositório do Projeto](https://github.com/vikpires/projeto_aneel_equipe14) | (Branch padrão: `develop`)
 
 * **Quadro Kanban:** [Kanban_projeto_aneel_equipe14](https://github.com/users/vikpires/projects/7/views/1)
 
@@ -50,7 +51,7 @@
 ---
 
 ## 2. Visão Geral
-Este documento consolida a **Fase 1 do CRISP-DM Compreensão do Negócio (Business Understanding)**. Sua finalidade é formalizar o alinhamento estratégico, mapear as dores do setor elétrico e fixar critérios técnicos mensuráveis antes da manipulação dos dados brutos no pipeline de dados.
+Este documento consolida a **Fase 1 do CRISP-DM - Compreensão do Negócio (Business Understanding)**. Sua finalidade é formalizar o alinhamento estratégico, mapear as dores do setor elétrico e fixar critérios técnicos mensuráveis antes da manipulação dos dados brutos no pipeline de dados.
 
 ---
 
@@ -84,7 +85,7 @@ A solução proposta visa apoiar as seguintes decisões críticas de negócio:
 Construir uma solução integrada de Análise de Dados e Machine Learning que permita analisar o comportamento histórico dos indicadores DEC e FEC, diagnosticar reincidências de transgressões e estimar a probabilidade de descumprimento dos limites regulatórios futuros em nível de conjunto consumidor.
 
 #### 3.4. Objetivos Específicos
-* Consolidar a série histórica (2023–2025) dos dados de continuidade da ANEEL
+* Consolidar a série histórica (2021–2025) dos dados de continuidade da ANEEL
 
 * Comparar os valores apurados com os limites regulatórios, mapeando taxas de transgressão e gerando ranking dos conjuntos elétricos mais críticos.
 
@@ -96,7 +97,23 @@ Construir uma solução integrada de Análise de Dados e Machine Learning que pe
 
 ---
 
-### 4. Usuários e Matriz de Stakeholders
+### 4. Metodologia
+
+O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
+
+1. **Compreensão do Negócio (Business Understanding):** Mapeamento das regras regulatórias (PRODIST/ANEEL), impacto financeiro das compensações por violação de DEC/FEC, definição de KPIs de negócio, métricas técnicas e escopo do projeto.
+
+2. **Compreensão dos Dados (Data Understanding):** Ingestão das bases anuais, auditoria de integridade e Análise Exploratória de Dados (EDA).
+
+3. **Preparação dos Dados (Data Preparation):** Limpeza, padronização e estruturação do modelo dimensional.
+
+4. **Modelagem (Modeling):** Desenvolvimento da camada analítica de medidas em DAX e modelagem preditiva de risco regulatório.
+
+5. **Avaliação (Evaluation):** Auditoria das regras de agregação e validação de desempenho dos modelos.
+
+6. **Implantação (Deployment) & Demo Day:** Desenvolvimento do relatório executivo no Power BI, documentação técnica e apresentação final.
+
+### 5. Usuários e Matriz de Stakeholders
 
 **Quem toma a decisão hoje?**  
 
@@ -123,7 +140,7 @@ Construir uma solução integrada de Análise de Dados e Machine Learning que pe
 
 ---
 
-### 5. Dados Necessários e Fontes 
+### 6. Dados Necessários e Fontes 
 
 **Dados Necessários**  
 * Dados dos indicadores: DEC e FEC apurados, limites regulatórios mensais/anuais, valores de compensação financeira e identificador da distribuidora.
@@ -133,7 +150,7 @@ Construir uma solução integrada de Análise de Dados e Machine Learning que pe
 * Dados derivados: Médias móveis, taxas de variação mensal, contagem de reincidência de violações consecutivas, índices de sazonalidade e score preditivo de risco de transgressão.
 
 **Fonte de Dados**  
-Os dados são de origem pública e extraídos do **Portal de Dados Abertos da ANEEL** e do arcabouço normativo do **PRODIST**. Para fins de análise, o conjunto de dados será limitado a um período de 3 anos (2023-2026):
+Os dados são de origem pública e extraídos do **Portal de Dados Abertos da ANEEL** e do arcabouço normativo do **PRODIST**. Para fins de análise, o conjunto de dados será limitado a um período de 5 anos (2021-2025):
 
 | Entidade / Recurso | Fonte Oficial | Periodicidade / Granularidade | Uso no Projeto |
 | :--- | :--- | :--- | :--- |
@@ -149,7 +166,7 @@ Arquivos originais em `.csv`/`.parquet` mantidos fora do versionamento do Git, p
 
 ---
 
-### 6. Hipóteses do Projeto 
+### 7. Hipóteses do Projeto 
 
 * **Hipótese 01** - Conjuntos com histórico crônico de transgressão de DEC e FEC apresentam probabilidade significativamente maior de ultrapassar os limites regulatórios nos períodos seguintes.
 
@@ -163,7 +180,7 @@ Arquivos originais em `.csv`/`.parquet` mantidos fora do versionamento do Git, p
 
 ---
 
-### 7. Riscos
+### 8. Riscos
 
 1. **Risco de Dados**
     * Dados faltantes ou nulos, com ausência de registros pontuais em limites ou apurações de conjuntos desativados/reestruturados.
@@ -188,7 +205,7 @@ Arquivos originais em `.csv`/`.parquet` mantidos fora do versionamento do Git, p
 
 ---
 
-### 8. Fora de Escopo
+### 9. Fora de Escopo
 
 * Não serão manipulados dados individualizados por consumidor, garantindo conformidade com a LGPD.
 
@@ -202,7 +219,7 @@ Arquivos originais em `.csv`/`.parquet` mantidos fora do versionamento do Git, p
 
 ---
 
-### 9. Estrutura de custos 
+### 10. Estrutura de custos 
 
 * **Fontes de Dados:** Gratuitas (Portal de Dados Abertos da ANEEL sob licença pública).
 
@@ -214,7 +231,7 @@ Arquivos originais em `.csv`/`.parquet` mantidos fora do versionamento do Git, p
 
 ---
 
-### 10. Solução
+### 11. Solução
 
 * Pipeline automatizado em Python/DuckDB para ingestão, tratamento de dados nulos, padronização de esquemas, criação de variáveis temporais (médias móveis, defasagens/lags e tendências) e exportação no formato `.parquet`.
 
@@ -226,12 +243,12 @@ Arquivos originais em `.csv`/`.parquet` mantidos fora do versionamento do Git, p
 
 ---
 
-### 11. Métricas de Avaliação e Benchmarks de Sucesso
+### 12. Métricas de Avaliação e Benchmarks de Sucesso
 
 1. **Qualidade e Integridade dos Dados:**
    * **Percentual de Valores Ausentes:** Registros sem preenchimento em campos críticos (`DEC`, `FEC`, `Limites` e `IDs de Conjunto`) inferiores a **1%**.
 
-   * **Consistência Temporal e Duplicidade:** Manter **0%** de duplicidade na granularidade chave (`Conjunto` + `Mês/Ano`) em todo o histórico de 2023 a 2026.
+   * **Consistência Temporal e Duplicidade:** Manter **0%** de duplicidade na granularidade chave (`Conjunto` + `Mês/Ano`) em todo o histórico de 2021 a 2025.
 
    * **Taxa de Registros Válidos:** Pelo menos **98%** das linhas em conformidade com as regras operacionais da ANEEL.
 
@@ -262,27 +279,24 @@ Arquivos originais em `.csv`/`.parquet` mantidos fora do versionamento do Git, p
 
 ---
 
-### 12. Requisitos e Restrições 
+### 13. Requisitos e Restrições 
 
-1. **Requisitos Funcionais (RF):**
-    * **RF01:** O pipeline deve consolidar os dados mensais de continuidade (DEC e FEC) de 2023 a 2026.
+| **Requisitos Funcionais (RF)** |
+|:---|
+| **RF01:** O pipeline deve consolidar os dados mensais de continuidade (DEC e FEC) de 2021 a 2025. | 
+| **RF02:** O sistema deve calcular o indicador booleano de transgressão (Apurado > Limite) e a margem de desvio relativo para cada conjunto/mês. |
+| **RF03:** A camada de dados deve alimentar o Power BI com um modelo dimensional (*Star Schema*) contendo tabelas fato e dimensão documentadas.|
+| **RF04:** O modelo de Machine Learning deve gerar uma coluna contendo o *Score de Risco* (probabilidade entre 0 e 1) de descumprimento para o período `t+1`.|
 
-    * **RF02:** O sistema deve calcular o indicador booleano de transgressão (Apurado > Limite) e a margem de desvio relativo para cada conjunto/mês.
-
-    * **RF03:** A camada de dados deve alimentar o Power BI com um modelo dimensional (*Star Schema*) contendo tabelas fato e dimensão documentadas.
-
-    * **RF04:** O modelo de Machine Learning deve gerar uma coluna contendo o *Score de Risco* (probabilidade entre 0 e 1) de descumprimento para o período `t+1`.
-
-2. **Requisitos Não Funcionais (RNF):**
-    * **RNF01:** Scripts de dados e modelagem versionados no Git com arquivo `requirements.txt` e ambiente virtual configurado.
-
-    * **RNF02:** Processamento de arquivos pesados via DuckDB em disco, sem exceder 4 GB de memória RAM local.
-
-    * **RNF03:** Estrita aderência à LGPD, não utilizando registros de consumo ou dados pessoais identificáveis.
+| **Requisitos Não Funcionais (RNF)**
+|:---|
+| **RNF01:** Scripts de dados e modelagem versionados no Git com arquivo `requirements.txt` e ambiente virtual configurado. |
+| **RNF02:** Processamento de arquivos pesados via DuckDB em disco, sem exceder 4 GB de memória RAM local.| 
+| **RNF03:** Estrita aderência à LGPD, não utilizando registros de consumo ou dados pessoais identificáveis.|
 
 ---
 
-### 13. Entregáveis
+### 14. Entregáveis
 
 1. **Repositório de Código Documentado (GitHub):**
 
@@ -314,7 +328,7 @@ Arquivos originais em `.csv`/`.parquet` mantidos fora do versionamento do Git, p
 
 ---
 
-### 14. Síntese Executiva 
+### 15. Síntese Executiva 
 
  <div align="center">
    <img src=".\assets\data_canvas.png" width=100% alt="Canvas do Problema de Dados" />

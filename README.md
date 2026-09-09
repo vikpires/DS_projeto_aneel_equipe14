@@ -1,20 +1,27 @@
  <div align="center">
    <img src=".\docs\assets\energy_towers.jpg" width=100% alt="Imagem de torres de energia elétrica" /> 
  </div>
+<br />
 
 # Projeto ANEEL - Energia em Risco
-### Análise de Dados de Continuidade Elétrica e Previsão de Risco Regulatório (ANEEL)
+### *Análise de Dados de Continuidade Elétrica e Previsão de Risco Regulatório (ANEEL)*
+
+---
 
 <p align="left">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" />
-  <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy" />
-  <img src="https://img.shields.io/badge/DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black" alt="DuckDB" />
-  <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge" alt="Matplotlib" />
-  <img src="https://img.shields.io/badge/Seaborn-4C72B0?style=for-the-badge" alt="Seaborn" />  
-  <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI" />
-  <img src="https://img.shields.io/badge/scikit_learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="Scikit-Learn" />
-  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Apache_Airflow-017CEE?style=for-the-badge&logo=Apache%20Airflow&logoColor=white" alt="Airflow">
+  <img src="https://img.shields.io/badge/DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black" alt="DuckDB">
+  <img src="https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white" alt="Pytest">
+  <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI">
+</p>
+
+<p align=left>
+
+  ![Last Commit](https://img.shields.io/github/last-commit/vikpires/projeto_aneel_equipe14?style=flat-square&logo=git&logoColor=white)
+  ![Open Issues](https://img.shields.io/github/issues/vikpires/projeto_aneel_equipe14?style=flat-square&logo=github&logoColor=white)
+  ![Release](https://img.shields.io/github/v/release/vikpires/projeto_aneel_equipe14?style=flat-square&logo=github&logoColor=white)
+  ![License](https://img.shields.io/github/license/vikpires/projeto_aneel_equipe14?style=flat-square&logo=github&logoColor=white)
 
 </p>
 
@@ -29,12 +36,12 @@ Projeto de **Análise de Dados e Machine Learning** desenvolvido sobre dados pú
 ## Sumário
 
 - [1. Contexto](#1-contexto)
-- [2. Objetivo Geral](#2-objetivo-geral)
-- [3. Objetivos Específicos](#3-objetivos-específicos)
-- [4. Base de Dados](#4-base-de-dados)
-- [5. Metodologia](#5-metodologia)
-- [6. Cronograma e Fases](#6-cronograma-e-fases)
-- [7. Organização dos Diretorios](#7-organização-dos-diretórios)
+- [2. Objetivo](#2-objetivo)
+- [3. Base de Dados](#3-base-de-dados)
+- [4. Tecnologias](#4-tecnologias)
+- [5. Como Executar](#5-como-executar)
+- [6. Organização dos Diretorios](#6-organização-dos-diretórios)
+- [7. Cronograma e Fases](#7-cronograma-e-fases)
 - [8. Equipe](#8-equipe)
 
 ---
@@ -51,100 +58,175 @@ A transgressão desses limites regulatórios acarreta compensações financeiras
 
 ---
 
-## 2. Objetivo Geral
+## 2. Objetivo
 
 Construir uma solução integrada de Análise de Dados e Machine Learning que permita analisar o comportamento histórico dos indicadores DEC e FEC, diagnosticar reincidências de transgressões e estimar a probabilidade de descumprimento dos limites regulatórios futuros em nível de conjunto consumidor.
 
 ---
 
-## 3. Objetivos Específicos
+## 3. Base de Dados
 
-* Consolidar a série histórica (2023–2025) dos dados de continuidade da ANEEL
-
-* Comparar os valores apurados com os limites regulatórios, mapeando taxas de transgressão e gerando ranking dos conjuntos elétricos mais críticos.
-
-* Identificar comportamentos cíclicos e disparidades regionais no desempenho operacional.
-
-* Treinar e avaliar um modelo de Machine Learning supervisionado para classificar o risco de violação (Apurado > Limite) de conjuntos elétricos no horizonte mensal subsequente.
-
-* Disponibilizar os diagnósticos, estimativas de passivo financeiro e scores de risco preditivo em dashboards interativos no Power BI sob modelagem *Star Schema*.
-
----
-
-## 4. Base de Dados
-
-Os dados utilizados são públicos e extraídos do portal de dados abertos da ANEEL. Para fins de análise, o conjunto de dados será limitado a um período de 3 anos (2023-2026):
+Os dados utilizados são públicos e extraídos do portal de dados abertos da ANEEL. Para fins de análise, o conjunto de dados será delimitado a um período de 5 anos **(2021-2025)**:
 
 **Datasets:** 
-- [Indicadores Coletivos de Continuidade (DEC e FEC)](https://dadosabertos.aneel.gov.br/pt_BR/dataset/indicadores-coletivos-de-continuidade-dec-e-fec)
-- [Interrupções de Energia Elétrica nas Redes de Distribuição)](https://dadosabertos.aneel.gov.br/pt_BR/dataset/indicadores-coletivos-de-continuidade-dec-e-fec)
-
-**Métricas Principais:** 
-- Valores apurados, limites regulatórios mensais e anuais contratados.
+- [Indicadores Coletivos de Continuidade (DEC e FEC)](https://dadosabertos.aneel.gov.br/pt_BR/dataset/indicadores-coletivos-de-continuidade-dec-e-fec) 
+- [Interrupções de Energia Elétrica nas Redes de Distribuição)](https://dadosabertos.aneel.gov.br/dataset/interrupcoes-de-energia-eletrica-nas-redes-de-distribuicao)
 
 ---
 
-## 5. Metodologia
+### 4. Tecnologias
 
-O projeto adotará o framework **CRISP-DM**, estruturado em seis fases:
-
-1. **Compreensão do Negócio (Business Understanding):** Mapeamento das regras regulatórias (PRODIST/ANEEL), impacto financeiro das compensações por violação de DEC/FEC, definição de KPIs de negócio, métricas técnicas e escopo do projeto.
-
-2. **Compreensão dos Dados (Data Understanding):** Ingestão das bases anuais, auditoria de integridade e Análise Exploratória de Dados (EDA).
-
-3. **Preparação dos Dados (Data Preparation):** Limpeza, padronização e estruturação do modelo dimensional.
-
-4. **Modelagem (Modeling):** Desenvolvimento da camada analítica de medidas em DAX e modelagem preditiva de risco regulatório.
-
-5. **Avaliação (Evaluation):** Auditoria das regras de agregação e validação de desempenho dos modelos.
-
-6. **Implantação (Deployment) & Demo Day:** Desenvolvimento do relatório executivo no Power BI, documentação técnica e apresentação final.
+**Tecnologia / Versão** | **Função** |
+| --- | --- |
+| ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)  | Execução do código e módulos do projeto |
+| ![Apache Airflow](https://img.shields.io/badge/Apache_Airflow-3.1.1-017CEE?style=flat-square&logo=Apache%20Airflow&logoColor=white)  | Agendamento batch, controle do fluxo de dependências e monitoramento de falhas |
+| ![DuckDB](https://img.shields.io/badge/DuckDB-1.0-FFF000?style=flat-square&logo=duckdb&logoColor=black) | Transformação SQL e geração dos Parquets |
+| ![Pytest](https://img.shields.io/badge/pytest-7.0-0A9EDC?style=flat-square&logo=pytest&logoColor=white) | Execução de testes automatizados |
+| ![Pandas](https://img.shields.io/badge/Pandas-2.2-150458?style=flat-square&logo=pandas&logoColor=white) <br> ![NumPy](https://img.shields.io/badge/NumPy-1.26-013243?style=flat-square&logo=numpy&logoColor=white) | Apoio na leitura tabular e cálculos numéricos |
+| ![Matplotlib](https://img.shields.io/badge/Matplotlib-3.8-11557C?style=flat-square) <br> ![Seaborn](https://img.shields.io/badge/Seaborn-0.13-4C72B0?style=flat-square) | Gráficos e diagnósticos estatísticos |
+| ![Scikit-Learn](https://img.shields.io/badge/scikit_learn-1.4-F7931E?style=flat-square&logo=scikitlearn&logoColor=white) | Algoritmos de ML e testes estatísticos |
+| ![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black) | Criação do dashboard gerencial |
+| ![Git](https://img.shields.io/badge/Git-2.43-F05032?style=flat-square&logo=git&logoColor=white) | Controle de versão do repositório |
 
 ---
 
-## 6. Cronograma e Fases
+## 5. Como Executar
+
+**Pré-requisitos:**
+
+* Python 3.11+
+* Git
+* Ambiente Linux ou WSL 2 (requisito necessário para compatibilidade com chamadas de sistema do Airflow).
+
+**1. Clonar o repositório e configurar o ambiente virtual**
+
+```bash
+git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
+cd SEU_REPOSITORIO
+
+python3.11 -m venv .venv
+source .venv/bin/activate  # No Windows/WSL
+pip install --upgrade pip
+pip install -r requirements.txt
+
+```
+
+**2. Opção A: Execução Direta (Standalone)**
+
+Para rodar todo o pipeline (Extração $\rightarrow$ Transformação $\rightarrow$ Validação) diretamente via terminal sem subir o servidor do Airflow:
+
+```bash
+python -m src.pipeline
+```
+
+```bash
+pytest -v tests/
+```
+
+**3. Opção B: Execução Orquestrada via Apache Airflow 3**
+
+**3.1. Definir a versão do Airflow e instalar o Apache Airflow**
+>[!WARNING]
+>**Atenção:** O Apache Airflow exige o arquivo de restrições (constraints) correspondente à versão exata do Python para evitar conflitos de dependências:
+
+```bash
+# Definir a versão do Airflow
+AIRFLOW_VERSION="3.1.1"
+PYTHON_VERSION="3.11"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+
+
+# Instalar o Airflow e o task SDK com as restrições oficiais
+pip install "apache-airflow==${AIRFLOW_VERSION}" "apache-airflow-task-sdk" --constraint $CONSTRAINT_URL
+```
+
+**3.2. Configurar as Variáveis de Ambiente**
+Exporte as variáveis para que o Airflow utilize o diretório local do projeto, reconheça a pasta `dags/` e localize os módulos em `src/`:
+
+```bash
+# Define a raiz do Airflow no diretório atual
+export AIRFLOW_HOME=$(pwd)
+
+# Aponta o caminho das DAGs para a pasta dags do projeto
+export AIRFLOW__CORE__DAGS_FOLDER=$(pwd)/dags
+
+# Desativa o carregamento de DAGs de exemplo do próprio Airflow
+export AIRFLOW__CORE__LOAD_EXAMPLES="False"
+
+# Garante que os imports de 'src' funcionem dentro das tasks
+export PYTHONPATH=$(pwd)
+
+```
+**3.3. Inicializar os serviços locais**
+Inicie os componentes do Airflow (Webserver, Scheduler e Triggerer) em modo desenvolvimento:
+
+```batch
+airflow standalone
+```
+>[!TIP]
+>O comando criará automaticamente o usuário admin. A senha aleatória gerada será exibida nos logs do terminal na primeira execução (ou gravada em `$AIRFLOW_HOME/simple_auth_manager_passwords.json.generated`).
+
+**3.4. Operar e disparar o pipeline**
+
+1. Acesse http://localhost:8080 no seu navegador.
+
+2. Faça login com o usuário **admin** e a **senha** gerada.
+
+3. Localize a DAG `aneel_energy_ingestion_batch`.
+
+4. Ative a DAG e clique no botão **Trigger DAG** para rodar o fluxo completo.
+
+---
+
+## 6. Organização dos Diretórios
+
+```markdown
+├── 📁 dags/               # Definições de DAGs e orquestração de pipelines (Airflow)
+├── 📁 data/
+│   ├── 📁 raw/            # Dados brutos originais (Camada Bronze)
+│   ├── 📁 interim/        # Dados intermediários tratados (Camada Silver)
+│   ├── 📁 external/       # Dados externos e bases de apoio
+│   └── 📁 processed/      # Dados finais consolidados para consumo analítico (Camada Gold)
+│
+├── 📁 docs/               # Documentação técnica, arquitetura e dicionário de dados
+│   └── 📁 assets/         # Imagens, fluxogramas e diagramas da documentação
+│
+├── 📁 models/             # Artefatos e arquivos de modelos treinados
+├── 📁 notebooks/          # Notebooks Jupyter para análise exploratória e prototipagem
+├── 📁 pbix/               # Relatórios e modelos de dados do Power BI
+├── 📁 references/         # Manuais normativos, notas técnicas e materiais de consulta
+├── 📁 reports/            # Relatórios consolidados e apresentações executivas
+├── 📁 src/                # Código-fonte modular do projeto (extractors, transformers, validators)
+├── 📁 tests/              # Suíte de testes automatizados e regras do Quality Gate
+├── 📄 .gitignore          # Regras de arquivos e pastas ignorados pelo Git
+├── 📄 CONTRIBUTING.md     # Guia de contribuição, padrões de código e fluxo de Git
+├── 📄 LICENSE             # Termos de licença de uso e distribuição do projeto
+├── 📄 README.md           # Apresentação geral, arquitetura e instruções de execução
+├── 📄 requirements.txt    # Dependências e bibliotecas Python do projeto
+└── 📄 setup_colab.sh      # Script de automação e provisionamento de ambiente no Google Colab
+
+```
+---
+
+## 7. Cronograma e Fases
 
 <p align="left">
   <a href="https://github.com/users/vikpires/projects/7/views/4?sliceBy[columnId]=Milestone">
-    <img src="https://img.shields.io/badge/Backlog_&_Roadmap-1074e7?style=for-the-badge&logo=github&logoColor=white" alt="Backlog e Roadmap" />
+    <img src="https://img.shields.io/badge/Backlog_&_Roadmap-1074e7?style=flat-square&logo=github&logoColor=white" alt="Backlog e Roadmap" />
   </a>
 </p>
 
+O projeto adotará o framework **CRISP-DM**. O cronograma do projeto segue as seis fases do framework:
+
+
 | Fase / Marco | Status | Período | Tarefas |
 | :--- | :---: | :---: | :---: |
-| **01:  Compreensão do Negócio (Business Understanding)** | Concluído | Semana 4 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/1) |
-| **02: Compreensão dos Dados (Data Understanding)** | Em Progresso | Semana 5 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/6) |
-| **03: Preparação dos Dados (Data Preparation)** | A Iniciar | Semana 6 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/2) |
-| **04: Modelagem (Modeling)** | A Iniciar | Semana 7 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/3) |
-| **05: Avaliação (Evaluation)** | A Iniciar | Semana 8 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/4) |
-| **06: Implantação (Deployment) & Demo Day** | A Iniciar | Semana 8 | [Ver Tarefas](https://github.com/vikpires/DS_projeto_aneel_equipe14/milestone/5) |
-
----
-
-## 7. Organização dos Diretórios
-
-```markdown
-├── 📁 data/
-│   ├── 📁 raw/            # Dados brutos originais (Camada Bronze)
-│   ├── 📁 interim/        # Dados intermediários (Camada Silver)
-│   ├── 📁 external/       # Dados externos e bases de apoio
-│   └── 📁 processed/      # Dados finais tratados para análise e modelagem (Camada Gold)
-│
-├── 📁 docs/               # Documentação do projeto, escopo e dicionário de dados
-│    ├── 📁 assets/        # Imagens e diagramas para documentação
-│
-├── 📁 models/             # Artefatos e arquivos de modelos treinados
-├── 📁 notebooks/          # Notebooks de exploração e prototipagem
-├── 📁 pbix/               # Arquivos e templates do Power BI
-├── 📁 reports/            # Relatórios e apresentações
-├── 📁 references/         # Manuais, guias metodológicos e materiais de consulta
-├── 📁 src/                # Código-fonte modular e scripts do projeto
-├── 📄 gitignore           # Regras de arquivos ignorados pelo Git
-├── 📄 LICENSE             # Licença de uso e distribuição do projeto
-├── 📄 README.md           # Apresentação geral e guia do repositório
-└── 📄 requirements.txt    # Lista de dependências e bibliotecas do projeto
-
-```
+| **01:  Compreensão do Negócio (Business Understanding)** | Concluído | Semana 4 | [Ver Tarefas](https://github.com/vikpires/projeto_aneel_equipe14/milestone/1) |
+| **02: Compreensão dos Dados (Data Understanding)** | Em Progresso | Semana 5 | [Ver Tarefas](https://github.com/vikpires/projeto_aneel_equipe14/milestone/6) |
+| **03: Preparação dos Dados (Data Preparation)** | A Iniciar | Semana 6 | [Ver Tarefas](https://github.com/vikpires/projeto_aneel_equipe14/milestone/2) |
+| **04: Modelagem (Modeling)** | A Iniciar | Semana 7 | [Ver Tarefas](https://github.com/vikpires/projeto_aneel_equipe14/milestone/3) |
+| **05: Avaliação (Evaluation)** | A Iniciar | Semana 8 | [Ver Tarefas](https://github.com/vikpires/projeto_aneel_equipe14/milestone/4) |
+| **06: Implantação (Deployment) & Demo Day** | A Iniciar | Semana 8 | [Ver Tarefas](https://github.com/vikpires/projeto_aneel_equipe14/milestone/5) |
 
 ---
 
