@@ -29,9 +29,10 @@ Escolha uma das abordagens abaixo de acordo com a sua preferência (Google Colab
 - Se precisar importar módulos de `src/` ou rodar scripts completos, execute na primeira célula:
 
 ```bash
-!git clone https://github.com/vikpires/DS_projeto_aneel_equipe14.git
-%cd /content/DS_projeto_aneel_equipe14
-!pip install -r requirements.txt
+# Baixa apenas o script de setup e executa diretamente na sessão do kernel
+!curl -O https://raw.githubusercontent.com/vikpires/DS_projeto_aneel_equipe14.git/develop/setup_colab.py
+import setup_colab
+setup_colab.setup()
 ```
 
 > [!WARNING]  
@@ -44,8 +45,8 @@ Escolha uma das abordagens abaixo de acordo com a sua preferência (Google Colab
 #### **1. Clonar o Repositório:**
 
 ```bash
-git clone git@github.com:vikpires/DS_projeto_aneel_equipe14.git
-cd DS_projeto_aneel_equipe14
+git clone git@github.com:vikpires/projeto_aneel_equipe14.git
+cd projeto_aneel_equipe14
 
 ```
 
@@ -61,7 +62,7 @@ python -m venv .venv
 - Linux / macOS::
 
 ```bash
-cd DS_projeto_aneel_equipe14
+cd projeto_aneel_equipe14
 python3 -m venv .venv
 source .venv/bin/activate
 ```
@@ -158,4 +159,3 @@ Para a organização e o acompanhamento das atividades da equipe, utilizamos o *
 ---
 > [!NOTE]
 > Estas são diretrizes gerais para padronizar o trabalho colaborativo. Qualquer dúvida técnica ou conflitos de código, informe ao grupo da equipe ou aproveite as reuniões de alinhamento.
-
