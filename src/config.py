@@ -13,7 +13,7 @@ SQL_DIR = PROJECT_ROOT / "src" / "sql"
 # URLs e informações do repositório
 REPO_NAME = "projeto_aneel_equipe14"
 REPO_URL = "https://github.com/vikpires/projeto_aneel_equipe14"
-TAG_RELEASE = "v0.1.0-data"
+TAG_RELEASE = "v0.1.0"
 RELEASE_BASE_URL = f"{REPO_URL}/releases/download/{TAG_RELEASE}"
 
 # Configuração de arquivos padrão e paths
