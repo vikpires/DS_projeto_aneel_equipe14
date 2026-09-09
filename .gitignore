@@ -11,9 +11,11 @@ AutoRecovery*
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
+.pytest_cache/
 
 # Ambientes virtuais
-.venv/
+.venv/*
+.venv*
 venv/
 env/
 env.bak/
@@ -37,3 +39,8 @@ data/raw/*
 data/interim/*
 !data/raw/.gitkeep
 !data/interim/.gitkeep
+
+# Airflow local
+.airflow/
+airflow.cfg
+airflow.db
