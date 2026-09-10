@@ -30,9 +30,11 @@ Escolha uma das abordagens abaixo de acordo com a sua preferência (Google Colab
 
 ```bash
 # Baixa apenas o script de setup e executa diretamente na sessão do kernel
-!curl -O https://raw.githubusercontent.com/vikpires/DS_projeto_aneel_equipe14.git/develop/setup_colab.py
+!curl -O https://raw.githubusercontent.com/vikpires/projeto_aneel_equipe14/refs/heads/develop/setup_colab.py
 import setup_colab
 setup_colab.setup()
+
+from src.config import REPO_URL, REPO_NAME
 ```
 
 > [!WARNING]  
