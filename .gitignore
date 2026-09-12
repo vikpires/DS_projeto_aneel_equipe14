@@ -48,3 +48,4 @@ data/processed/*
 .airflow/
 airflow.cfg
 airflow.db
+airflow_home

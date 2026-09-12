@@ -23,8 +23,8 @@ consolidado AS (
         c.IdeConjunto,
         c.DscConjunto,
         COALESCE(CAST(r.CodMunicipio AS VARCHAR), 'NÃO INFORMADO') AS CodMunicipio,
-        COALESCE(r.NomMunicipio, 'NÃO INFORMADO') AS NomMunicipio,
-        COALESCE(r.SigUF, 'NÃO INFORMADO') AS SigUF,
+        COALESCE(r.Municipio, 'NÃO INFORMADO') AS Municipio,
+        COALESCE(r.UF, 'NÃO INFORMADO') AS UF,
         COALESCE(r.Regiao, 'NÃO INFORMADO') AS Regiao
     FROM consolidado c
     INNER JOIN distribuidoras d USING (NumCNPJ)
@@ -38,7 +38,7 @@ SELECT
     IdeConjunto,
     DscConjunto,
     CodMunicipio,
-    NomMunicipio,
-    SigUF,
+    Municipio,
+    UF,
     Regiao
 FROM numerado;

@@ -51,8 +51,8 @@ def validate_interim_tables() -> None:
         Path(REG_PATH): {
             "IdeConjunto",
             "CodMunicipio",
-            "NomMunicipio",
-            "SigUF",
+            "Municipio",
+            "UF",
             "Regiao",
         },
     }
