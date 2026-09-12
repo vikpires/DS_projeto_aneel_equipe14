@@ -26,16 +26,7 @@ Escolha uma das abordagens abaixo de acordo com a sua preferência (Google Colab
 
 - Para salvar alterações: vá em `Arquivo > Salvar uma cópia no GitHub...`, e insira a mensagem de commit.
 
-- Se precisar importar módulos de `src/` ou rodar scripts completos, execute na primeira célula:
-
-```bash
-# Baixa apenas o script de setup e executa diretamente na sessão do kernel
-!curl -O https://raw.githubusercontent.com/vikpires/projeto_aneel_equipe14/refs/heads/develop/setup_colab.py
-import setup_colab
-setup_colab.setup()
-
-from src.config import REPO_URL, REPO_NAME
-```
+- Para clonar o repositório e baixar os dados de Release, siga as instruções do arquivo: [references/download_release.ipynb](references/download_release.ipynb)
 
 > [!WARNING]  
 > Atenção no Colab: O armazenamento temporário é volátil. Sempre salve sua cópia no GitHub antes de fechar a aba do navegador. Nunca salve senhas, tokens ou credenciais nas células de código.
