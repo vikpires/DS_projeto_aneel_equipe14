@@ -1,9 +1,7 @@
-from importlib import import_module
-import pytest
+from datetime import datetime
 
-fetch_data = import_module("src.data.fetch_data")
 from src.data.transformer import transform_data
-from src.config import ANO_INICIO, ANO_FIM
+from src.data.constants import ANO_INICIO, ANO_FIM
 from tests.constants import (
     QUERY_INPUT_CONTINUIDADE,
     QUERY_INPUT_INTERRUPCOES,
@@ -12,7 +10,6 @@ from tests.constants import (
 )
 
 
-# Executa a transformação de dados e verifica se o arquivo Parquet de Continuidade contém os dados esperados.
 def test_execute_continuidade_transformation_creates_expected_parquet(
     tmp_path, db_connection
 ):
@@ -31,10 +28,9 @@ def test_execute_continuidade_transformation_creates_expected_parquet(
     result = db_connection.sql(
         QUERY_OUTPUT_CONTINUIDADE.format(raw_path=output_path)
     ).fetchall()
-    assert result == [(2021, 1, "X", 10, "Conjunto", 1.5, None)]
+    assert result == [(2021, 1, "X", "12345678000199", 10, "CONJUNTO", "DEC", 1.5)]
 
 
-# Executa a transformação de dados e verifica se o arquivo Parquet de interrupções contém os dados esperados.
 def test_execute_interrupcoes_transformation_creates_expected_parquet(
     tmp_path, db_connection
 ):
@@ -58,9 +54,13 @@ def test_execute_interrupcoes_transformation_creates_expected_parquet(
         (
             2021,
             5,
+            datetime(2021, 5, 10, 10, 0),
+            datetime(2021, 5, 10, 11, 30),
             1.5,
             "X",
+            "12345678000199",
             20,
+            "99",
             15,
             100,
             13.8,
@@ -69,6 +69,43 @@ def test_execute_interrupcoes_transformation_creates_expected_parquet(
             "Manutencao",
         )
     ]
+
+
+def test_transform_data_skips_valid_interim_cache(tmp_path, db_connection):
+    raw_path = tmp_path / "raw.parquet"
+    output_path = tmp_path / "output.parquet"
+    db_connection.sql(QUERY_INPUT_CONTINUIDADE).write_parquet(str(raw_path))
+    output_path.write_bytes(b"existing parquet")
+
+    transform_data(
+        db_connection,
+        "filter_continuidade",
+        raw_path,
+        output_path,
+        ano_inicio=ANO_INICIO,
+        ano_fim=ANO_FIM,
+    )
+
+    assert output_path.read_bytes() == b"existing parquet"
+
+
+def test_transform_data_force_rebuilds_interim_cache(tmp_path, db_connection):
+    raw_path = tmp_path / "raw.parquet"
+    output_path = tmp_path / "output.parquet"
+    db_connection.sql(QUERY_INPUT_CONTINUIDADE).write_parquet(str(raw_path))
+    output_path.write_bytes(b"existing parquet")
+
+    transform_data(
+        db_connection,
+        "filter_continuidade",
+        raw_path,
+        output_path,
+        force=True,
+        ano_inicio=ANO_INICIO,
+        ano_fim=ANO_FIM,
+    )
+
+    assert output_path.read_bytes() != b"existing parquet"
 
 
 if __name__ == "__main__":

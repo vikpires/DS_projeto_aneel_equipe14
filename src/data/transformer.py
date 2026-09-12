@@ -1,58 +1,152 @@
-import duckdb
+from __future__ import annotations
+import logging
 from pathlib import Path
-from src.config import ANO_FIM, ANO_INICIO, INTERIM_DIR
-from src.data.constants import DATASETS
-from src.utils.sql_loader import load_sql_query
+import duckdb
+
+from src.config import DATASETS, INTERIM_DIR
+from src.data.constants import (
+    ANO_FIM,
+    ANO_INICIO,
+    COLUMN_CANDIDATES,
+    REQUIRED_COLUMNS,
+)
+from src.utils.sql_loader import (
+    detect_csv_encoding,
+    load_sql_query,
+    resolve_column_name,
+)
+
+logger = logging.getLogger(__name__)
 
 
-# Carrega a query externa e executa a transformação no DuckDB.
+# Processar os dados brutos e gerar arquivos intermediários no formato Parquet.
 def transform_data(
     con: duckdb.DuckDBPyConnection,
     query_name: str,
     raw_path: Path | str,
     out_path: Path | str,
+    force: bool = False,
     **kwargs,
-):
-
-    # Converte para strings limpas no formato POSIX
+) -> None:
     raw_str = raw_path.as_posix() if isinstance(raw_path, Path) else str(raw_path)
-    out_str = out_path.as_posix() if isinstance(out_path, Path) else str(out_path)
-    out_name = Path(out_str).name
+    out_path_obj = Path(out_path)
+    out_str = out_path_obj.resolve().as_posix()
+    out_name = out_path_obj.name
 
-    print(f"[DUCKDB] Processando pipeline via '{query_name}.sql' -> {out_name}...")
+    out_path_obj.parent.mkdir(parents=True, exist_ok=True)
+    if out_path_obj.is_file() and out_path_obj.stat().st_size > 0 and not force:
+        logger.info("[CACHE] Arquivo intermediário já existe: %s", out_name)
+        return
 
-    sql_query = load_sql_query(query_name=query_name, raw_path=raw_str, **kwargs)
+    logger.info(
+        "[DUCKDB] Processando pipeline via '%s.sql' -> %s...",
+        query_name,
+        out_name,
+    )
 
-    con.execute(f"""
+    required_columns = REQUIRED_COLUMNS.get(query_name, tuple(COLUMN_CANDIDATES))
+    resolved_columns = {
+        name: resolve_column_name(con, raw_str, COLUMN_CANDIDATES[name])
+        for name in required_columns
+    }
+    csv_encoding = (
+        detect_csv_encoding(raw_str) if Path(raw_str).suffix.lower() == ".csv" else None
+    )
+
+    sql_query = load_sql_query(
+        query_name=query_name,
+        raw_path=raw_str,
+        csv_encoding=csv_encoding,
+        **resolved_columns,
+        **kwargs,
+    ).strip()
+
+    if sql_query.endswith(";"):
+        sql_query = sql_query[:-1]
+
+    copy_statement = f"""
         COPY ({sql_query})
         TO '{out_str}'
-        (FORMAT PARQUET, COMPRESSION 'SNAPPY')
-    """)
+        (FORMAT PARQUET, COMPRESSION 'ZSTD');
+    """
+    con.execute(copy_statement)
+    logger.info("[SUCESSO] Gerado: %s", out_name)
 
-    print(f"[SUCESSO] Gerado: {out_name}")
 
+def run_transform_data(force: bool = False) -> None:
+    INTERIM_DIR.mkdir(parents=True, exist_ok=True)
 
-# Executar o processo de transformação de dados.
-def run_transform_data():
     with duckdb.connect() as con:
-        print("\n--- Processando Continuidade via DuckDB ---")
+        # Configurações de performance para evitar estouro de memória
+        con.execute("SET memory_limit = '8GB';")
+        con.execute("SET threads = 4;")
+        con.execute("SET preserve_insertion_order = false;")
+
+        # 1. Continuidade (DEC / FEC Apurados)
+        logger.info("--- Processando Continuidade via DuckDB ---")
         transform_data(
             con=con,
             query_name=DATASETS["continuidade"]["query_name"],
             raw_path=DATASETS["continuidade"]["raw_path"],
             out_path=DATASETS["continuidade"]["out_path"],
+            force=force,
             ano_inicio=ANO_INICIO,
             ano_fim=ANO_FIM,
         )
 
-        print("\n--- Processando Interrupções (Consolidando Lote) via DuckDB ---")
+        # 2. Limites Regulatórios ANEEL
+        logger.info("--- Processando Limites Regulatórios via DuckDB ---")
+        transform_data(
+            con=con,
+            query_name=DATASETS["limites"]["query_name"],
+            raw_path=DATASETS["limites"]["raw_path"],
+            out_path=DATASETS["limites"]["out_path"],
+            force=force,
+            ano_inicio=ANO_INICIO,
+            ano_fim=ANO_FIM,
+        )
+
+        # 3. Atributos dos Conjuntos
+        logger.info("--- Processando Atributos dos Conjuntos via DuckDB ---")
+        transform_data(
+            con=con,
+            query_name=DATASETS["atributos"]["query_name"],
+            raw_path=DATASETS["atributos"]["raw_path"],
+            out_path=DATASETS["atributos"]["out_path"],
+            force=force,
+            ano_inicio=ANO_INICIO,
+            ano_fim=ANO_FIM,
+        )
+
+        # 4. Regiões dos Conjuntos
+        logger.info("--- Processando Regiões dos Conjuntos via DuckDB ---")
+        transform_data(
+            con=con,
+            query_name=DATASETS["regiao"]["query_name"],
+            raw_path=DATASETS["regiao"]["raw_path"],
+            out_path=DATASETS["regiao"]["out_path"],
+            force=force,
+            ano_inicio=ANO_INICIO,
+            ano_fim=ANO_FIM,
+        )
+
+        # 5. Histórico de Interrupções
+        logger.info("--- Processando Interrupções (Consolidado) via DuckDB ---")
+        raw_interrupcoes = DATASETS["interrupcoes"].get(
+            "raw_pattern", DATASETS["interrupcoes"].get("raw_path")
+        )
         transform_data(
             con=con,
             query_name=DATASETS["interrupcoes"]["query_name"],
-            raw_path=DATASETS["interrupcoes"]["raw_pattern"],
+            raw_path=raw_interrupcoes,
             out_path=DATASETS["interrupcoes"]["out_path"],
+            force=force,
             ano_inicio=ANO_INICIO,
             ano_fim=ANO_FIM,
         )
 
-    print(f"\nProcessamento concluído! Verifique a pasta {INTERIM_DIR}.")
+    logger.info("Processamento concluído! Verifique a pasta %s.", INTERIM_DIR)
+
+
+if __name__ == "__main__":
+    run_transform_data()

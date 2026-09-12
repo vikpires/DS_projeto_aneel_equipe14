@@ -4,6 +4,8 @@
 *.pbix.tmp
 ~$*.pbix
 AutoRecovery*
+temp_duckdb/*
+temp_duckdb/
 
 # ===============================
 # 2. Python, Jupyter & Ambientes
@@ -37,8 +39,10 @@ Thumbs.db
 # Dados Locais
 data/raw/*
 data/interim/*
+data/processed/*
 !data/raw/.gitkeep
 !data/interim/.gitkeep
+!data/processed/.gitkeep
 
 # Airflow local
 .airflow/
